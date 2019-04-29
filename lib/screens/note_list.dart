@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/screens/note_detail.dart';
 
 class NoteList extends StatefulWidget {
   @override
@@ -17,6 +18,10 @@ class _NoteListState extends State<NoteList> {
       body: getNoteListView(),
       floatingActionButton: FloatingActionButton(onPressed: () {
          debugPrint("FAB clicked");
+         //navigate between screens
+         Navigator.push(context, MaterialPageRoute(builder: (context){
+           return NoteDetail();
+         }));
       },
         tooltip: "Tilføj ny Notat",
         
