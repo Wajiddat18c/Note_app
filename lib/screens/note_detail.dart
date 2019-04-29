@@ -58,6 +58,61 @@ class _NoteDetailState extends State<NoteDetail> {
                   )
                 ),
               ),
+            ),
+            //Third element in listview
+
+            Padding(
+              padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+              child: TextField(
+                controller: descriptionController,
+                style: textStyle,
+                onChanged: (value){
+                  debugPrint("Somechanges in description field");
+                },
+                decoration: InputDecoration(
+                    labelText: "Indhold",
+                    labelStyle: textStyle,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0)
+                    )
+                ),
+              ),
+            ),
+
+            //Fourth Element
+            Padding(
+              padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: RaisedButton(
+                        color: Theme.of(context).primaryColorDark,
+                        textColor: Theme.of(context).primaryColorLight,
+                        child: Text("Gem", textScaleFactor: 1.5,),
+                        onPressed: (){
+                          setState(() {
+                            debugPrint("Save was clicked");
+                          });
+                        }),
+                  ),
+
+                  Container(width: 5.0,),
+
+                  Expanded(
+                    child: RaisedButton(
+                        color: Theme.of(context).primaryColorDark,
+                        textColor: Theme.of(context).primaryColorLight,
+                        child: Text("Slet", textScaleFactor: 1.5,),
+                        onPressed: (){
+                          setState(() {
+                            debugPrint("slet was clicked");
+                          });
+                        }),
+                  ),
+
+
+                ],
+              ),
             )
 
           ],
