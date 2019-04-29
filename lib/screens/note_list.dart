@@ -18,10 +18,8 @@ class _NoteListState extends State<NoteList> {
       body: getNoteListView(),
       floatingActionButton: FloatingActionButton(onPressed: () {
          debugPrint("FAB clicked");
-         //navigate between screens
-         Navigator.push(context, MaterialPageRoute(builder: (context){
-           return NoteDetail();
-         }));
+
+         navigateToDetail("Tilføj Notat");
       },
         tooltip: "Tilføj ny Notat",
         
@@ -56,10 +54,20 @@ class _NoteListState extends State<NoteList> {
             ),
             onTap: () {
               debugPrint("tap");
+              navigateToDetail("Redigere Note");
             },
           ),
         );
       },
     );
+  }
+
+
+  //navigate between screens
+  void navigateToDetail(String titel){
+    Navigator.push(context, MaterialPageRoute(builder: (context){
+      return NoteDetail(titel);
+    }));
+
   }
 }
