@@ -15,6 +15,14 @@ class _NoteListState extends State<NoteList> {
         title: Text("Notes"),
       ),
       body: getNoteListView(),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+         debugPrint("FAB clicked");
+      },
+        tooltip: "Tilføj ny Notat",
+        
+        child: Icon(Icons.add),
+
+      ),
     );
   }
 
@@ -37,8 +45,13 @@ class _NoteListState extends State<NoteList> {
               style: titleStyle,
             ),
             subtitle: Text("Dummy date"),
-            
-            trailing: Icon(Icons.delete, color: Colors.grey,),
+            trailing: Icon(
+              Icons.delete,
+              color: Colors.grey,
+            ),
+            onTap: () {
+              debugPrint("tap");
+            },
           ),
         );
       },
