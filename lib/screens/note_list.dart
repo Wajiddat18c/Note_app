@@ -6,9 +6,42 @@ class NoteList extends StatefulWidget {
 }
 
 class _NoteListState extends State<NoteList> {
+  int count = 0;
+
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Notes"),
+      ),
+      body: getNoteListView(),
+    );
+  }
 
-    return null;
+  ListView getNoteListView() {
+    TextStyle titleStyle = Theme.of(context).textTheme.subhead;
+
+    return ListView.builder(
+      itemCount: count,
+      itemBuilder: (BuildContext context, int position) {
+        return Card(
+          color: Colors.green,
+          elevation: 2.0,
+          child: ListTile(
+            leading: CircleAvatar(
+              backgroundColor: Colors.yellow,
+              child: Icon(Icons.arrow_forward),
+            ),
+            title: Text(
+              "Dummy Titel",
+              style: titleStyle,
+            ),
+            subtitle: Text("Dummy date"),
+            
+            trailing: Icon(Icons.delete, color: Colors.grey,),
+          ),
+        );
+      },
+    );
   }
 }
