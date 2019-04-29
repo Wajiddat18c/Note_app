@@ -24,21 +24,35 @@ class _NoteDetailState extends State<NoteDetail> {
         child: ListView(
           children: <Widget>[
             //first element in listview
-            ListTile(
-              title: DropdownButton(
-                  items: _priorities.map((String dropDownStringItem) {
-                    return DropdownMenuItem<String>(
-                      value: dropDownStringItem,
-                      child: Text(dropDownStringItem),
-                    );
-                  }).toList(),
-                  style: textStyle,
-                  value: "Lav",
-                  onChanged: (valueSelectedByUser) {
-                    setState(() {
-                      debugPrint("User selected $valueSelectedByUser");
-                    });
-                  }),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      "Prioritering:",
+                      style: textStyle,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ListTile(
+                    title: DropdownButton(
+                        items: _priorities.map((String dropDownStringItem) {
+                          return DropdownMenuItem<String>(
+                            value: dropDownStringItem,
+                            child: Text(dropDownStringItem),
+                          );
+                        }).toList(),
+                        style: textStyle,
+                        value: "Lav",
+                        onChanged: (valueSelectedByUser) {
+                          setState(() {
+                            debugPrint("User selected $valueSelectedByUser");
+                          });
+                        }),
+                  ),
+                ),
+              ],
             ),
 
             //second element in listview
@@ -47,16 +61,14 @@ class _NoteDetailState extends State<NoteDetail> {
               child: TextField(
                 controller: titleController,
                 style: textStyle,
-                onChanged: (value){
+                onChanged: (value) {
                   debugPrint("Somechanges in Titel field");
                 },
                 decoration: InputDecoration(
-                  labelText: "Titel",
-                  labelStyle: textStyle,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0)
-                  )
-                ),
+                    labelText: "Titel",
+                    labelStyle: textStyle,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0))),
               ),
             ),
             //Third element in listview
@@ -66,16 +78,14 @@ class _NoteDetailState extends State<NoteDetail> {
               child: TextField(
                 controller: descriptionController,
                 style: textStyle,
-                onChanged: (value){
+                onChanged: (value) {
                   debugPrint("Somechanges in description field");
                 },
                 decoration: InputDecoration(
                     labelText: "Indhold",
                     labelStyle: textStyle,
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0)
-                    )
-                ),
+                        borderRadius: BorderRadius.circular(5.0))),
               ),
             ),
 
@@ -88,33 +98,36 @@ class _NoteDetailState extends State<NoteDetail> {
                     child: RaisedButton(
                         color: Theme.of(context).primaryColorDark,
                         textColor: Theme.of(context).primaryColorLight,
-                        child: Text("Gem", textScaleFactor: 1.5,),
-                        onPressed: (){
+                        child: Text(
+                          "Gem",
+                          textScaleFactor: 1.5,
+                        ),
+                        onPressed: () {
                           setState(() {
                             debugPrint("Save was clicked");
                           });
                         }),
                   ),
-
-                  Container(width: 5.0,),
-
+                  Container(
+                    width: 5.0,
+                  ),
                   Expanded(
                     child: RaisedButton(
                         color: Theme.of(context).primaryColorDark,
                         textColor: Theme.of(context).primaryColorLight,
-                        child: Text("Slet", textScaleFactor: 1.5,),
-                        onPressed: (){
+                        child: Text(
+                          "Slet",
+                          textScaleFactor: 1.5,
+                        ),
+                        onPressed: () {
                           setState(() {
                             debugPrint("slet was clicked");
                           });
                         }),
                   ),
-
-
                 ],
               ),
             )
-
           ],
         ),
       ),
