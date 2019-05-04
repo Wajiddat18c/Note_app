@@ -33,7 +33,7 @@ class _NoteListState extends State<NoteList> {
         onPressed: () {
           debugPrint("FAB clicked");
 
-          navigateToDetail("Tilføj Notat");
+          navigateToDetail(Note("","", 2), "Tilføj Notat");
         },
         tooltip: "Tilføj ny Notat",
         child: Icon(Icons.add),
@@ -72,7 +72,7 @@ class _NoteListState extends State<NoteList> {
             ),
             onTap: () {
               debugPrint("tap");
-              navigateToDetail("Redigere Note");
+              navigateToDetail(this.noteList[position], "Redigere Note");
             },
           ),
         );
@@ -126,9 +126,9 @@ class _NoteListState extends State<NoteList> {
 
 
   //navigate between screens
-  void navigateToDetail(String titel) {
+  void navigateToDetail(Note note, String title) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return NoteDetail(titel);
+      return NoteDetail(note, title);
     }));
   }
 
