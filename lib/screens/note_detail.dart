@@ -206,4 +206,35 @@ class _NoteDetailState extends State<NoteDetail> {
   void updateDescription() {
     note.description = descriptionController.text;
   }
+
+  //Save data to database
+  void _save() async {
+
+
+
+    int result;
+    if (note.id != null) {
+      //Case 1: Update operation
+      result = await helper.updateNote(note);
+    } else {
+      //Case 2: Insert operation
+      result = await helper.insertNote(note);
+    }
+
+    if (result != 0) {
+      //Success
+      _showAlertDialog("Status", "Note blev gemt");
+    } else {
+      //Failure
+      _showAlertDialog("Status", "Note blev ikke gemt");
+    }
+  }
+
+  _showAlertDialog(String title, String message){
+    AlertDialog alertDialog = AlertDialog(
+      title: Text(title),
+      content: Text(message),
+    );
+    showDialog(context: context,builder: (_) => alertDialog);
+  }
 }
