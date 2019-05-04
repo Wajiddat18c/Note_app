@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:note_app/screens/note_list.dart';
 import 'package:note_app/screens/note_detail.dart';
 
-void main(){
+void main() {
   runApp(MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -13,9 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Husk Mine Noter",
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.purple
-      ),
+      theme: ThemeData(primarySwatch: Colors.purple),
       home: NoteList(),
     );
   }

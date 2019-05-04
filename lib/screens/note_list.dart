@@ -21,6 +21,7 @@ class _NoteListState extends State<NoteList> {
   Widget build(BuildContext context) {
     if (noteList == null) {
       noteList = List<Note>();
+      updateListView();
     }
 
     return Scaffold(
@@ -51,17 +52,23 @@ class _NoteListState extends State<NoteList> {
           elevation: 2.0,
           child: ListTile(
             leading: CircleAvatar(
-              backgroundColor: Colors.yellow,
-              child: Icon(Icons.arrow_forward),
+              backgroundColor:
+                  getPriorityColor(this.noteList[position].priority),
+              child: getPriorityIcon(this.noteList[position].priority),
             ),
             title: Text(
-              "Dummy Titel",
+              this.noteList[position].title,
               style: titleStyle,
             ),
-            subtitle: Text("Dummy date"),
-            trailing: Icon(
-              Icons.delete,
-              color: Colors.grey,
+            subtitle: Text(this.noteList[position].date),
+            trailing: GestureDetector(
+              child: Icon(
+                Icons.delete,
+                color: Colors.grey,
+              ),
+              onTap: (){
+                _delete(context, noteList[position]);
+              },
             ),
             onTap: () {
               debugPrint("tap");
@@ -88,6 +95,7 @@ class _NoteListState extends State<NoteList> {
         return Colors.yellow;
     }
   }
+//Returns the priority icon
 
   Icon getPriorityIcon(int priority) {
     switch (priority) {
@@ -102,22 +110,20 @@ class _NoteListState extends State<NoteList> {
     }
   }
 
-  void _delete(BuildContext context, Note note)async{
-
+  void _delete(BuildContext context, Note note) async {
     int result = await databaseHelper.deleteNote(note.id);
-    if(result != 0){
+    if (result != 0) {
       _showSnackBar(context, "Noten er slettet");
-
+      updateListView();
     }
   }
 
-  void _showSnackBar(BuildContext context, String message){
-
+  void _showSnackBar(BuildContext context, String message) {
     final snackBar = SnackBar(content: Text(message));
     Scaffold.of(context).showSnackBar(snackBar);
   }
 
-  //Returns the priority icon
+
 
   //navigate between screens
   void navigateToDetail(String titel) {
@@ -125,4 +131,20 @@ class _NoteListState extends State<NoteList> {
       return NoteDetail(titel);
     }));
   }
+
+  void updateListView(){
+
+    final Future<Database> dbFuture = databaseHelper.initializeDatabase();
+    dbFuture.then((database){
+
+    Future<List<Note>> noteListFuture = databaseHelper.getNoteList();
+    noteListFuture.then((noteList){
+      setState(() {
+        this.noteList = noteList;
+        this.count = noteList.length;
+      });
+    });
+    });
+  }
+
 }
