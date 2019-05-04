@@ -94,6 +94,7 @@ class _NoteDetailState extends State<NoteDetail> {
                     style: textStyle,
                     onChanged: (value) {
                       debugPrint("Somechanges in Titel field");
+                      updateTitle();
                     },
                     decoration: InputDecoration(
                         labelText: "Titel",
@@ -111,6 +112,7 @@ class _NoteDetailState extends State<NoteDetail> {
                     style: textStyle,
                     onChanged: (value) {
                       debugPrint("Somechanges in description field");
+                      updateDescription();
                     },
                     decoration: InputDecoration(
                         labelText: "Indhold",
@@ -195,5 +197,13 @@ class _NoteDetailState extends State<NoteDetail> {
     return priority;
   }
 
+  //Update the title of Note object
+  void updateTitle() {
+    note.title = titleController.text;
+  }
 
+  //Update the description of Note object
+  void updateDescription() {
+    note.description = descriptionController.text;
+  }
 }
