@@ -1,6 +1,6 @@
 # note_app
 
-[Download Currency Converter for Android here](https://play.google.com/store/apps/details?id=com.ahmad.wajid.flutter_app)
+[Download Huskeliste Note App for Android here](https://play.google.com/store/apps/details?id=com.ahmad.wajid.flutter_app)
 
 This is an note app using SQLight
 
